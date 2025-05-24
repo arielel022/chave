@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chave's Personal Webpage</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f4f4f4;
+      text-align: center;
+    }
+    .container {
+      max-width: 600px;
+      margin: 50px auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .profile-img {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid #333;
+    }
+    .name {
+      font-size: 24px;
+      margin: 15px 0 5px;
+    }
+    .social-link {
+      color: #fff;
+      background: #e1306c;
+      padding: 10px 20px;
+      text-decoration: none;
+      border-radius: 5px;
+      display: inline-block;
+      margin-top: 10px;
+    }
+    .breaking-news {
+      margin-top: 30px;
+      background: #ff4d4d;
+      color: #fff;
+      padding: 10px;
+      font-weight: bold;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img src="profile.jpg" alt="Profile Photo" class="profile-img">
+    <div class="name">Chave</div>
+    <a href="https://instagram.com/chavefootball" target="_blank" class="social-link">Follow me on Instagram</a>
+
+    <div class="breaking-news" id="breaking-news">
+      Loading latest GitHub news...
+    </div>
+  </div>
+
+  <script>
+    // Example GitHub API fetch for breaking news (latest commit from a public repo)
+    const breakingNews = document.getElementById("breaking-news");
+
+    fetch("https://api.github.com/repos/github/roadmap/commits")
+      .then(response => response.json())
+      .then(data => {
+        if (data && data.length > 0) {
+          breakingNews.textContent = "Latest GitHub Update: " + data[0].commit.message;
+        } else {
+          breakingNews.textContent = "No recent updates found on GitHub.";
+        }
+      })
+      .catch(error => {
+        breakingNews.textContent = "Failed to load GitHub news.";
+        console.error(error);
+      });
+  </script>
+</body>
+</html>
